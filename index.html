@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░██░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░░░▄▀░░░░█░░▄▀▄▀▄▀▄▀▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█
+█░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀░░███░░▄▀░░░░░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░██░░░░░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█
+█████████░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░░░░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░░░▄▀░░░░█░░▄▀░░██░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░██░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░░░░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░░░░░█░░░░░░████████████░░░░░░██░░░░░░█░░░░░░██░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+███████████████████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░████░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░███░░░░░░░░░░░░░░████░░░░░░█
+█░░▄▀░░░░░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░███░░▄▀░░░░░░░░▄▀░░███░░▄▀░░░░░░▄▀░░████░░▄▀░░█
+█░░▄▀░░░░░░▄▀░░░░░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░███░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░░░░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░████░░░░░░█
+█░░▄▀░░██████████░░▄▀░░█░░▄▀░░████████████░░▄▀░░████░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░██░░▄▀░░███████████
+█░░▄▀░░██████████░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░████░░░░░░█
+█░░▄▀░░██████████░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░█
+█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░████░░░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████████████████
+-->
+	
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hi There, I am Vatan Birendra Singh. I am a Security Analyst, from Hyderabad India">
+    <meta name="keywords" content="Vatan Birendra , 0xKayala,Vatan Birendra Singh, 0xKayala, 0xKayala hacker, 0xKayala redteam, Bug Bounty Hunter">
+    <meta name="author" content="Vatan Birendra Singh ">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Vatan Birendra Singh=> InfoSec</title>
+    <!-- Favicon -->
+    <link href="img/hacker.png" type="image/png" rel="icon">
+    
+    <!-- All CSS -->
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+    <!-- Global site tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L16KL7RKER"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L16KL7RKER');
+    </script>
+
+	
+    <!-- Global site tag (gtag.js) -->
+</head>
+
+<body id="body" data-spy="scroll" data-target="#menu-list">
+
+	<!--  start page loader  -->
+	<div id="preloader">
+		<div class="scroll-static"></div>
+	</div>
+	<!--  end page loader  -->
+
+    <!-- begin of main-wrapper -->
+    <div class="main-wrapper">
+		<!-- begin of navbar -->
+		<div class="nav-bar">
+			<!-- begin of scroll-indicator -->
+			<div class="scroll-indicator"></div>
+			<nav>
+				<ul id="menu-list">
+					<li class="nav-item">
+						<a class="active nav-link" href="#body" data-text="Home">
+							<span>01</span>Home
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#about" data-text="About">
+							<span>02</span>About
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#experience" data-text="Experience">
+							<span>03</span>Experience
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#hall" data-text="Hall">
+							<span>04</span>Hobbies
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#certifications" data-text="Certification">
+						<span>05</span>Certification
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#education" data-text="Education">
+							<span>06</span>Education
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#achievements" data-text="Achievements">
+							<span>07</span>Achievements
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#contact" data-text="Contact">
+							<span>08</span>Contact
+						</a>
+					</li> 
+					<li class="nav-item">
+						<a class="nav-link" href="#supportme" data-text="Support-Me">
+							<span>09</span>Support-Me
+						</a>
+					</li>
+				</ul> <br><br><br>
+
+			</nav>
+			
+		</div>
+		<!-- end of navbar -->
+		<!-- begin of main-content -->
+		<div class="main-content">
+			<!-- begin of header -->
+			<header>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-7">
+							<!-- logo -->
+							<div class="logo">
+								<a style="color: rgb(255, 6, 6); text-shadow: rgb(255, 19, 19) 2px 3px 19px;"href="https://0xkayala.github.io/"><strong>[Vatan Birendra Singh<img src="img/programming.ico" alt="Computer man" style="width:32px;height:32px;">0xKayala]</strong></a>
+							</div>
+						</div>
+						<div class="col-5">
+							<a href="https://0xkayala.github.io/blog" target="_blank" class="default-btn header-action-btn"><i class="ti-agenda"></i>Blog</a>&nbsp;
+							<div class="default-btn menu-btn">
+								<i class="ti-menu"></i>
+								<i class="ti-close"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- end of header -->
+
+			<!-- begin of home-wrapper -->
+			<div class="home-wrapper">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-5 col-sm-5">
+							<div class="hero-img wow fadeIn" data-wow-delay=".2s">
+								<div class="shape"></div>
+								<!-- hero image -->
+								<img class="img-fluid" src="img/Robot.png" alt="">
+							</div><br><br>
+							<iframe style="pointer-events: none;" data-wow-delay=".2s" src="https://free.timeanddate.com/clock/i83jkenu/n1595/fn17/fs16/fcf90/tc111/pct/avb/ftb/bas2/bat8/bac111/pa8/tt0/tw1/th1/ta1/tb4" frameborder="1" width="360" height="60" allowtransparency="true"></iframe>
+
+						</div>
+
+						<div class="col-md-7 col-sm-7">
+							<div class="hero-content">
+								<h2 class="intro-name">
+									<span style="color: rgb(0, 243, 0); text-shadow: rgb(81, 255, 0) 2px 3px 19px ;"class="wow slideInLeft" data-wow-delay=".2s" >Hello World !</span>
+									<span style="color: rgb(80, 83, 251); text-shadow: rgb(10, 0, 148) 2px 3px 19px;"class="wow slideInLeft" data-wow-delay=".5s" ><strong>I'm Vatan Birendra Singh</strong> </span>
+								</h2>
+								<p>
+									<span class="wow slideInLeft" data-wow-delay=".5s">Security Analyst | Bug Hunter | Security Researcher | CTF Player</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of home-wrapper -->
+
+			<!-- begin of about-wrapper -->
+			<div id="about" class="wrapper about-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+
+							<h3 class="wrapper-heading">About Me</h3>
+
+							<h4 class="about-sub-heading"> <strong>Hi, I am Vatan Birendra Singh  and here are some details about me 👇 </strong></h4>
+							<p  class="about-text">I am <strong id="sk"> a Security Analyst, who recently acquired Certifed Ethical Hacker (Practical) from EC-Council, a Bug Bounty Hunter</strong> and <strong id="sk">Security Researcher.</strong> I am currently preparing for the <strong id="pr">OSCP Certification</strong> and pursue my career in <strong id="pr">Red Teaminging</strong>.<br/>
+
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".14s" style="width:97%"></div>
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".14s" style="width:97%"></div>
+
+							I have recently completed my<strong> BCA In  Information Security</strong> in 2022 from <strong style="color: crimson; font-size:large;">Tilak Maharashtra Vidyapith (TMV)</strong>..<br><br> I have hands-on experience with <strong id="sk">Web, API, Network & Basic Android Pentest</strong>, have a good command on <strong id="sk"> Bash-Scripting,</strong > along with <strong id="sk">all major OS such as Windows, Linux </strong> and currently learning <strong id="pr">IOS Pentest</strong>. I spend my free time on <b id="pt"> TryHackMe</b> and <b id="pt">Hackthebox</b> platforms to expand my skills.<br><br>
+							I have <b id="sk">hand-on experience</b> with some significant tools like <b><strong id="st">BurpSuite</strong id="st">, <strong id="st">Nuclei</strong id="st">, <strong id="st">Nmap</strong id="st">, <strong id="st">Nessus</strong>, <strong id="st">Metasploit</strong>, <strong id="st">SqlMap</strong>, <strong id="st">Wireshark</strong>, and vulnerabilities like <strong id="st">OWASP TOP-10</strong>, <strong id="st">SANS TOP-25</strong></b> etc. I am also actively looking for any collaborations with InfoSec members for <strong id="pr">Red Teaming Projects</strong> and <strong id="pr">Bug Bounty Programs</strong><br><br>
+							</p>
+							<a href="https://vatantechs.blogspot.com/" target="_blank"  class="default-btn"><i class="ti-agenda"></i>My Blog</a>
+							<a href="https://0xkayala.github.io/Satya%20Prakash%20-%20CEH.pdf" target="_blank"  class="default-btn"><i class="ti-agenda"></i>Download My Resume</a>
+
+							<!-- social profile links -->
+							<div class="social-links">
+								<span>Connect with Me </span>
+								<ul>
+									<li><a href="https://www.linkedin.com/in/0xKayala/" data-text="in" target="_blank"><i class="ti-linkedin"></i></a></li>
+									<li><a href="https://www.youtube.com/@0xKayala" data-text="yt" target="_blank"><i class="ti-youtube"></i></a></li>
+									<li><a href="https://www.github.com/0xKayala/" data-text="git" target="_blank"><i class="ti-github"></i></a></li>
+									<li><a href="https://twitter.com/0xKayala" data-text="tw" target="_blank"><i class="ti-twitter"></i></a></li>
+									<li><a href="https://www.instagram.com/0xKayala" data-text="ig" target="_blank"><i class="ti-instagram"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<!-- end of about-wrapper -->
+			<!-- begin of skills-wrapper -->
+			<div id="skills" class="wrapper skills-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 margin-on-md">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Skills</h3>
+
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Web Application Penetration Testing</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Network Penetration Testing</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Android Penetration Testing</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>API Penetration Testing</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:40%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Operating System - Linux/Windows</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".2s" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Bash Scripting</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".3s" style="width:95%"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<!-- section heading -->
+<br><br><br><br>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Python</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:55%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>HTML/CSS</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:750%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<!-- skill item -->
+							<div class="skill-item">
+								<p></p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Automation</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:60%"></div>
+								</div>
+							</div>
+							<div class="skill-item">
+								<p>GitHub</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:70%"></div>
+								</div>
+							</div>
+							<div class="skill-item">
+								<p>YAML</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:70%"></div>
+								</div>
+							</div>
+							
+							<!-- skill item -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of skills-wrapper -->
+
+			<!-- begin of experience-wrapper -->
+			<div id="experience" class="wrapper experience-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							 <h3 class="wrapper-heading">Experience</h3>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company"><b>Vatins, Hyderabad</b></h4>
+								<p style="color: rgb(252, 156, 13);" class="position-name"><b>Cyber Security Analyst</b></p>
+								<p class="mute-text">Apr 2023 - Oct 2023</p>
+								<ul>
+									<li>• Web Application Penetration Testing. </li>
+									<li>• SAST and DAST. </li>
+									<li>• Internal and External Penetration Testing </li>
+									<li>• API Penetration Testing. </li>
+									<li>• Network Penetration Testing. </li>
+									<li>• Android Penetration Testing. </li>
+									<li>• Threat Intelligence using OSINT. </li>
+									<li>• Incident Management & Dark Web Analysis. </li>
+									<li>• Report Writing and Documentation.</li>
+								</ul>  
+
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company"><b>My Next Film Pvt Ltd, Hyderabad</b></h4>
+								<p style="color: rgb(252, 156, 13);" class="position-name"><b>Web Application Security Analyst</b></p>
+								<p class="mute-text">Sep 2022 - Feb 2023</p>
+								<ul>
+									<li>• Perform Vulnerability Assessments. </li>
+									<li>• Perform penetration tests on Web applications. </li>
+									<li>• Perform penetration test on API. </li>
+									<li>• Network penetration test. </li>
+									<li>• Documentation of report about the security findings and help management or IT team to fix the issue </li>
+								</ul>  
+
+							</div>
+						</div> 	
+						
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company"><b>CyberXchange · Internship, Hyderabad</b></h4>
+								<p style="color: rgb(252, 156, 13);" class="position-name"><b>Ethical Hacking</b></p>
+								<p class="mute-text">May 2022 - September 2022</p>
+								<ul>
+									<li>• Perform web application pentesting.</li>
+									<li>• Perform mobile application pentesting.</li>
+									<li>• Documentations and writing reports.</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company"><b>Bug Hunting</b></h4>
+								<p style="color: rgb(252, 156, 13);" class="position-name"><b>Independent Security Researcher</b></p>
+								<p class="mute-text">May 2022 - Present</p>
+								<ul>
+									<li>• Received Multiple Hall of Fames</li>
+									<li>• Received Multiple Swags</li>
+									<li>• Received Multiple Acknowledgements</li>
+									<li>• Received couple of Acknowledgements from NCIIPC & CERT-In</li>
+									<li>• Looking forward to making more contributions to Secure the Digital Assets </li>
+									
+								</ul>
+							</div>
+						</div>
+						
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company"><b>Genpact, Hyderabad</b></h4>
+								<p style="color: rgb(252, 156, 13);" class="position-name"><b>Process Developer</b></p>
+								<p class="mute-text">Feb 2019 - April 2022</p>
+								<ul>
+									<li>• Worked as a Process Developer - Digital Crime Unit (DCU) with the following job responsibilities:</li>
+									<li>• Maintain and improve upon, as necessary, the existing vulnerability management program, including maintenance of scanning tools and licensing, procedures, reporting, and client communications.</li>
+									<li>• Investigate and create cases for security threats while performing initial triage and escalate for further investigation and mitigation.</li>
+									<li>• Monitor Security Alerts and investigate phishing emails by leveraging tools such as Proofpoint or reported by the users.</li>
+									<li>• Scan the Internal/External Assets and report the security vulnerabilities and fix or patch them by co-ordinating with the assigned developers.</li>
+								</ul> 
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company"><b>EC-Council, Hyderabad</b></h4>
+								<p style="color: rgb(252, 156, 13);" class="position-name"><b>Research Associate (Information Security)</b></p>
+								<p class="mute-text">July 2017 - August 2018</p>
+								<ul>
+									<li>• Worked on Information Security projects and developed Courseware for Industry standard certifications like CEH, CND, ECSA of EC-Council.</li>
+									<li>• Tested iLabs and reported security vulnerabilities.</li>
+								</ul> 
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div> 
+			<!-- end of experience-wrapper -->			
+
+
+			<!-- begin of hall offame-wrapper -->
+			<div id="hall" class="wrapper experience-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<h3 class="wrapper-heading">Hobbies</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">CTF [ THM-2%]</h4>
+								<h4 class="company">CTF [ HTB-Noob]</h4>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Research and explore new technologies and certifications</h4>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Bug Hunting</h4>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+									<h4 class="company">Follow-up latest security incidents</h4>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Programming and Automation</h4>
+							</div>
+						</div>	
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Watching Web Series & Movies</h4>
+							</div>
+						</div>
+			
+					</div>
+				</div>
+			</div>
+			<!-- end of walloffame-wrapper			
+
+
+
+			<!-- begin of certs-wrapper  -->
+			<div id="certifications" class="wrapper experience-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Certifications & Achievements</h3>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Certifed Ethical Hacker (Practical)</h4>
+								<p style="color: rgb(255, 167, 34);" class="position-name">EC-Council</p>
+								<p class="mute-text"><a href="https://aspen.eccouncil.org/VerifyBadge?type=certification&a=ktXaSJUpWzLxnBGTM+JIq58xOT3cXFi4eyTdR6SQM8I=" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID:ECC5931847602</p>
+								<p class="mute-text">November 01, 2022</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Certified Secure Computer User</h4>
+								<p style="color: rgb(255, 167, 34);" class="position-name">EC-Council</p>
+								<p class="mute-text"><a href="https://aspen.eccouncil.org/VerifyBadge?type=certification&a=/9eihnLMv8kHhweUxbnsR5l2O7XUipOOtrloejQpxH4=" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID:ECC47685271912</p>
+								<p class="mute-text">August 09, 2018</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Cybersecurity Essentials</h4>
+								<p style="color: rgb(255, 167, 34);" class="position-name">Cisco</p>
+								<p class="mute-text"><a href="https://www.credly.com/badges/b69f2a68-802b-4cd2-9173-0246597168bd" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID:b69f2a68-802b-4cd2-9173-0246597168bd</p>
+								<p class="mute-text">June 02, 2021</p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Cybersecurity Fundamentals</h4>
+								<p style="color: rgb(255, 167, 34);" class="position-name">IBM</p>
+								<p class="mute-text"><a href="https://www.credly.com/badges/14ddec48-5e6a-4dd6-a96b-da61e7e72f79" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID:14ddec48-5e6a-4dd6-a96b-da61e7e72f79</p>
+								<p class="mute-text">June 06, 2021</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Introduction to Cybersecurity Tools & Cyber Attacks</h4>
+								<p style="color: rgb(255, 167, 34);" class="position-name">IBM - Coursera</p>
+								<p class="mute-text"><a href="https://www.coursera.org/account/accomplishments/certificate/7BN23DCXZ6JQ" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID:7BN23DCXZ6JQ</p>
+								<p class="mute-text">June 22, 2021</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Foundations of Operationalizing MITRE ATT&CK</h4>
+								<p style="color: goldenrod;" class="position-name">AttackIQ</p>
+								<p class="mute-text"><a href="https://www.academy.attackiq.com/certificate/6711?resource_id=4118&user_id=189122&type=course" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID: 6711</p>
+								<p class="mute-text">September 20, 2022</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Certified Network Security Specialist</h4>
+								<p style="color: goldenrod;" class="position-name">ICSI, UK (International CyberSecurity Institute)</p>
+								<p class="mute-text"><a href="https://www.credential.net/9225881e-5dd7-493a-8a75-322a8ca00da7" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Certification ID: 17431995</p>
+								<p class="mute-text">May 02, 2020</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Network Security Associate (NSE-1)</h4>
+								<p style="color: goldenrod;" class="position-name">Fortinet</p>
+								<p class="mute-text"><a href="https://training.fortinet.com/badges/badge.php?hash=388fd1acfb56a2dfb587808b8864fef4c1e2ac1c" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Certification ID: taiVyECPCN</p>
+								<p class="mute-text">September 18, 2022</p>
+
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">API Security Fundamentals</h4>
+								<p style="color: goldenrod;" class="position-name">APIsec University</p>
+								<p class="mute-text"><a href="https://www.credly.com/badges/bf6e7494-7f36-436a-b000-a3056f6221aa/public_url" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Certification ID: bf6e7494-7f36-436a-b000-a3056f6221aa</p>
+								<p class="mute-text">May 25, 2023</p>
+
+							</div>
+						</div>
+						
+						
+					
+
+					</div>
+				</div>
+			</div>
+<!-- end of certs-wrapper -->	
+
+			<!-- begin of education-wrapper -->
+			<div id="education" class="wrapper education-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Education</h3>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">PG Diploma (Information Security)</h4>
+								<p class="institute">Indira Gandhi National Open University (IGNOU) </br> Hyderabad, Telangana </p>
+								<p class="mute-text">2020 - 2021</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">Bachelor of Technology (Information Technology)</h4>
+								<p class="institute">DVRCET/JNTUH </br> Sangareddy, Telangana </p>
+								<p class="mute-text">2013 - 2017</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">Intermediate (10+2)</h4>
+								<p class="institute">Nagarjuna Junior College</br> Sangareddy, Telangana</p>
+								<p class="mute-text">2010 - 2012</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">Matriculation (10th)</h4>
+								<p class="institute">St Anthony's High School</br> Sangareddy, Telangana</p>
+								<p class="mute-text">2009 - 2010</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<!-- end of education-wrapper -->
+
+			<!-- begin of achivements-wrapper -->
+			<div id="achievements" class="wrapper achivements-wrapper">
+				<div class="container-fluid">
+
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<h3 class="wrapper-heading">Achievements</h3>
+									</div>
+									<div class="col-md-6">
+										<div class="experience-single">
+											<h4 class="company">Hall of Fame </h4>
+											<!-- <h4 style="color: goldenrod;" class="position-name"><b>Company&nbsp;&nbsp;</b> <b style="color:darkcyan">&nbsp;&nbsp;&nbsp; Last Time  </b> <a href="https://0xKayala.github.io/blog/" >&nbsp;&nbsp;&nbsp;&nbsp;Links</a></h4> -->
+											<h4 style="color: goldenrod;" class="position-name"><b>Inflectra&nbsp;</b> <b style="color:darkcyan">&nbsp;&nbsp; November 2022 </b> <a href="https://www.inflectra.com/Company/Responsible-Disclosure.aspx" >&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>&nbsp;Nokia</b> <b style="color:darkcyan">&nbsp;&nbsp; January 2023 </b> <a href="https://www.nokia.com/notices/responsible-disclosure/" >&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>&nbsp;David Tvildiani Medical Univeristy</b> <b style="color:darkcyan">&nbsp;&nbsp; November 2022 </b> <a href="https://www.openbugbounty.org/reports/2989403/" >&nbsp;&nbsp;Check here!</a></h4>
+										</div>
+									</div>
+
+
+			
+									<div class="col-md-6">
+										<div class="experience-single">
+											<h4 class="company"> Acknowledgement </h4>
+											<!-- <h4 style="color: goldenrod;" class="position-name"><b>Company&nbsp;&nbsp;</b> <b style="color:darkcyan">&nbsp;&nbsp;&nbsp; Last Time  </b> <a href="https://0xKayala.github.io/blog/" >&nbsp;&nbsp;&nbsp;&nbsp;Links</a></h4> -->
+											<h4 style="color: goldenrod;" class="position-name"><b>TryHackMe&nbsp;</b> <b style="color:darkcyan">&nbsp; February 2023 </b> <a href="https://www.linkedin.com/posts/0xkayala_bugbountytips-bughunting-bugbounty-activity-7030767706920419328-T7EO/">&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>RealPage, Inc&nbsp;</b> <b style="color:darkcyan">&nbsp; January 2023 </b> <a href="https://www.linkedin.com/posts/0xkayala_bugbounty-bughunting-bugbountytips-activity-7018487887478353920-lZ6T/">&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>CERT-In (5+ Reports)&nbsp;</b> <b style="color:darkcyan">&nbsp; October to December 2022 </b> <a href="https://www.linkedin.com/in/0xkayala/details/honors/">&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>NCIIPC India (A unit of NTRO)&nbsp;</b> <b style="color:darkcyan">&nbsp; November 2022 </b> <a href="https://www.linkedin.com/in/0xkayala/details/honors/">&nbsp;&nbsp;Check here!</a></h4>
+
+										</div>
+									</div>
+
+
+									<div class="col-md-6">
+										<div class="experience-single">
+											<h4 class="company">Appreciation/Recognition Letter </h4>
+											<!-- <h4 style="color: goldenrod;" class="position-name"><b>Company&nbsp;&nbsp;</b> <b style="color:darkcyan">&nbsp;&nbsp;&nbsp; Last Time  </b> <a href="https://0xKayala.github.io/blog/" >&nbsp;&nbsp;&nbsp;&nbsp;Links</a></h4> -->
+											<h4 style="color: goldenrod;" class="position-name"><b>Zyxel&nbsp;</b> <b style="color:darkcyan">&nbsp; February 2023 </b> <a href="https://www.linkedin.com/posts/0xkayala_bughunting-bugbountytips-bughunter-activity-7029494805810335744-lwYb/" >&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>Panasonic&nbsp;</b> <b style="color:darkcyan">&nbsp; January 2023 </b> <a href="https://www.linkedin.com/posts/0xkayala_panasonic-bugbounty-bughunting-activity-7026426721197330432-b1ad/" >&nbsp;&nbsp;Check here!</a></h4>
+
+
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="experience-single">
+											<h4 class="company">Swag</h4>
+											<!-- <h4 style="color: goldenrod;" class="position-name"><b>Company&nbsp;&nbsp;</b> <b style="color:darkcyan">&nbsp;&nbsp;&nbsp; Last Time  </b> <a href="https://0xKayala.github.io/blog/" >&nbsp;&nbsp;&nbsp;&nbsp;Links</a></h4> -->
+											<h4 style="color: goldenrod;" class="position-name"><b>SIDN&nbsp;</b> <b style="color:darkcyan">&nbsp; January 2023 </b> <a href="http://bit.ly/3K71Qgm" >&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>CircleCi&nbsp;</b> <b style="color:darkcyan">&nbsp; January 2023 </b> <a href="http://bit.ly/3xlQSvG" >&nbsp;&nbsp;Check here!</a></h4>
+											<h4 style="color: goldenrod;" class="position-name"><b>Hacklido&nbsp;</b> <b style="color:darkcyan">&nbsp; January 2023 </b> <a href="http://bit.ly/40FboF8" >&nbsp;&nbsp;Check here!</a></h4>
+
+										</div>
+									</div>
+
+
+
+
+								</div>
+
+						    </div>
+				
+				</div>
+			</br>
+						<div class="slider">
+					    <div class="slide-track-1">
+					        <div class="slide">
+					            <img src="img/1.png" alt="">
+					        </div>
+					        <div class="slide">
+					            <img src="img/2.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="img/3.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="img/4.svg" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="img/5.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="img/6.webp" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="img/7.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="/img/8.svg" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/9.png" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/10.png" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/11.webp" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/12.png" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/13.jpg" alt="">
+					        </div>
+					    </div>
+					</div>
+				</br>
+					<div class="slider">
+					    <div class="slide-track-2">
+					        <div class="slide">
+					            <img src="/img/13.jpg" alt="">
+					        </div>
+					        <div class="slide">
+					            <img src="/img/12.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="/img/11.webp" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="/img/10.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="/img/9.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="/img/8.svg" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="img/7.png" alt="">
+					        </div>
+
+					        <div class="slide">
+					            <img src="/img/6.webp" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/5.png" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/4.svg" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/3.png" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/2.png" alt="">
+					        </div>
+						<div class="slide">
+					            <img src="/img/1.png" alt="">
+					        </div>
+					    </div>
+					</div>
+	
+			<!-- begin of contact-wrapper -->
+			<div id="contact" class="wrapper contact-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Contact Us </h3>
+							<p><b>Please consider to drop query for additional info!</b></p>
+						</div>
+						<div class="col-lg-12 col-md-12">
+							<div class="contact-info">
+								<p><span class="ti-email"></span>0xKayala@gmail.com</p>
+								<p><span class="ti-email"></span>+91 9949968828</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<!-- end of contact-wrapper -->
+
+			<!-- begin of contact-wrapper -->
+			<div id="contact" class="wrapper contact-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Support Me</h3>
+							<p><b>Support me by donating a cup of coffee 👇</b></p>
+						</div>
+						<div class="col-lg-12 col-md-12">
+							<div class="contact-info">
+
+								<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="satyakayala" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- begin of contact-wrapper -->
+			<footer class="wrapper footer-wrapper">
+				<div class="container-fluid">
+					<div class="col-md-12 text-center">
+						<div class="footer-social">
+							<a href="https://www.linkedin.com/in/0xKayala/" target="_blank">LinkedIn</a>
+							<a href="https://www.youtube.com/@0xKayala" target="_blank">YouTube</a>
+							<a href="https://github.com/0xKayala" target="_blank">GitHub</a>
+							<a href="https://twitter.com/0xKayala" target="_blank">Twitter</a>
+						</div>
+						<p style="color: rgba(251, 251, 251, 0.89); font-size: 20px; box-shadow: rgb(228, 255, 202);" class="footer-copyright"><strong>© Copyright 2023 - Satya Prakash</strong></p>
+					</div>
+				</div>
+			</footer>
+			<!-- end of contact-wrapper -->
+
+			<!-- scroll-to top -->
+			<a class="default-btn scroll-to-top" href="#body"><span class="ti-angle-up "></span></a>
+
+		</div>
+		<!-- end of main-content -->
+    </div>
+    <!-- end of main-wrapper -->
+
+    <!-- All JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
